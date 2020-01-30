@@ -1,27 +1,18 @@
-# OpenWeatherApp
+| Open Weather Data App | Angular 8 | Tests | Docker | 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.16.
+## Requirement
+To run this app, you will need to install Node and Docker on your machine
 
-## Development server
+## How to run app
+Run `docker-compose up --build`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Navigate to `http://localhost:4200/` on your browser
 
-## Code scaffolding
+## Stop Docker from Running
+Run `docker-compose down`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## How to run tests
+Run `ng test`
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Check Lint
+Run `ng lint`
