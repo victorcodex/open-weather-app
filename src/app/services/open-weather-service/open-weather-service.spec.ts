@@ -63,7 +63,7 @@ describe('Open Weather Data Service', () => {
       });
 
       const req = httpMock.expectOne(
-        `${env.openWeatherDataApiUrl}/weather?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
+        `weather?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
       );
       expect(req.request.method).toBe('GET');
       req.flush(dummyOpenWeatherData);
@@ -84,7 +84,7 @@ describe('Open Weather Data Service', () => {
       });
 
       const req = httpMock.expectOne(
-        `${env.openWeatherDataApiUrl}/forecast?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
+        `forecast?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
       );
       expect(req.request.method).toBe('GET');
       req.flush(dummyOpenWeatherForecastData);
@@ -101,12 +101,12 @@ describe('Open Weather Data Service', () => {
 
         const dummyOpenWeatherDailyForecastData: OpenWeatherDataForecast = constants.OPEN_WEATHER_FORECAST_MOCK_DATA;
 
-        service.getWeatherDailyForecastForCity(cityName, units).subscribe((result: OpenWeatherDataForecast) => {
+        service.getDailyWeatherForecastForCity(cityName, units).subscribe((result: OpenWeatherDataForecast) => {
           expect(result).toEqual(dummyOpenWeatherDailyForecastData);
         });
 
         const req = httpMock.expectOne(
-          `${env.openWeatherDataApiUrl}/forecast/daily?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
+          `forecast/daily?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`
         );
         expect(req.request.method).toBe('GET');
         req.flush(dummyOpenWeatherDailyForecastData);

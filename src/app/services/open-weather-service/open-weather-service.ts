@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { retry, catchError } from 'rxjs/operators';
 
 import { environment as env } from './../../../environments/environment';
 import { OpenWeatherData } from '../../interfaces/open-weather-data';
@@ -28,17 +28,19 @@ export class OpenWeatherService {
 
   }
 
+
   /**
    * GET api.openweathermap.org/data/2.5/weather?q={city name}&appid={app id}&units={metric}
    */
   getCurrentWeatherForCity(cityName: string, units: string): Observable<OpenWeatherData> {
     return this.http
       .get<OpenWeatherData>(
-        `${env.openWeatherDataApiUrl}/weather?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
+        `weather?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
         this.httpOptions
       )
       .pipe(
-        catchError(this.helpers.handleError)
+        catchError(this.helpers.handleError),
+        retry(2)
       );
   }
 
@@ -48,25 +50,27 @@ export class OpenWeatherService {
   getWeatherForecastForCity(cityName: string, units: string): Observable<OpenWeatherDataForecast> {
     return this.http
       .get<OpenWeatherDataForecast>(
-        `${env.openWeatherDataApiUrl}/forecast?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
+        `forecast?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
         this.httpOptions
       )
       .pipe(
-        catchError(this.helpers.handleError)
+        catchError(this.helpers.handleError),
+        retry(2)
       );
   }
 
   /**
    * GET api.openweathermap.org/data/2.5/forecast/daily?q={city name}&appid={app id}&units={metric}
    */
-  getWeatherDailyForecastForCity(cityName: string, units: string): Observable<OpenWeatherDataForecast> {
+  getDailyWeatherForecastForCity(cityName: string, units: string): Observable<OpenWeatherDataForecast> {
     return this.http
       .get<OpenWeatherDataForecast>(
-        `${env.openWeatherDataApiUrl}/forecast/daily?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
+        `forecast/daily?q=${cityName}&appid=${env.openWeatherDataAppId}&units=${units}`,
         this.httpOptions
       )
       .pipe(
-        catchError(this.helpers.handleError)
+        catchError(this.helpers.handleError),
+        retry(2)
       );
   }
 
