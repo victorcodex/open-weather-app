@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { OpenWeatherService } from './services/open-weather-service/open-weather-service';
 import { Helpers } from './config/helpers';
+import { Constants } from './config/constants';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { Helpers } from './config/helpers';
   providers: [
     OpenWeatherService,
     Helpers,
+    Constants,
   ],
   bootstrap: [
     AppComponent,
