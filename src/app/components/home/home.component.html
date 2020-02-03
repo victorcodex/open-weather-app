@@ -1,1 +1,33 @@
-<p>home works!</p>
+<div class="container">
+    <mat-card>
+        <mat-grid-list cols="5">
+            <mat-grid-tile *ngFor="let city of preferredCities | objectKey">
+                <div class="container-child">
+                    <div>
+                        <img src="https://openweathermap.org/img/w/{{ preferredCities[city]?.currentData?.weather[0]?.icon }}.png" alt="icon">
+                    </div>
+                    <div class="main">
+                        {{ preferredCities[city]?.currentData?.weather[0].main }}
+                    </div>
+                    <div class="temp">
+                        {{ preferredCities[city]?.currentData?.main?.temp }} °C - {{ preferredCities[city]?.currentData?.wind?.speed }} km/h
+                    </div>
+
+                    <div>
+                        <img 
+                            class="flag-gif"
+                            src="http://www.geonames.org/flags/x/{{ preferredCities[city]?.currentData?.sys?.country?.toLowerCase() }}.gif" alt="country_img" />
+                        <span class="city-title">
+                            {{ city }}, {{ preferredCities[city]?.currentData?.sys?.country }}
+                        </span>
+                    </div>
+
+                    <div class="weather-overview" *ngIf="preferredCities[city]?.currentData?.weather">
+
+                    </div>
+                </div>
+              </mat-grid-tile>
+          </mat-grid-list>
+    </mat-card>
+</div>
+<!-- TODO: Make page responsive -->

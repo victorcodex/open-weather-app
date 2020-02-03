@@ -9,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { OpenWeatherService } from './services/open-weather-service/open-weather-service';
 import { Helpers } from './config/helpers';
 import { Constants } from './config/constants';
+import { ObjectKeyPipe } from './pipes/object-key';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 describe('AppComponent', () => {
@@ -17,11 +20,14 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         HomeComponent,
+        ObjectKeyPipe,
       ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        MatCardModule,
+        MatGridListModule,
       ],
       providers: [
         OpenWeatherService,
@@ -38,6 +44,11 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('should create an instance of ObjectKeyPipe', () => {
+    const pipe = new ObjectKeyPipe();
+    expect(pipe).toBeTruthy();
   });
 
 });

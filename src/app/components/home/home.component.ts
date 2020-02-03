@@ -18,14 +18,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private subscriptionManager: Subscription;
   units: string;
+  preferredCities: object;
 
   constructor(private openWeatherService: OpenWeatherService, private constants: Constants, private helpers: Helpers) {
     this.units = constants.OPEN_WEATHER_REQUEST_PARAMS.units;
+    this.preferredCities = constants.SELECTED_CITIES;
     this.subscriptionManager = new Subscription();
   }
 
   ngOnInit() {
-    this.getDailyWeatherForecastForCity();
+    this.getCurrentWeatherForCity();
+    this.getWeatherForecastForCity();
   }
 
   /**
@@ -33,11 +36,21 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   getCurrentWeatherForCity(): void {
 
-    const currentWeatherSubscription = this.openWeatherService.getCurrentWeatherForCity(
-      'London', this.units
-    ).subscribe((response: OpenWeatherData) => {
-      console.log('getCurrentWeatherForCity ', response);
-    });
+    let currentWeatherSubscription: Subscription;
+
+    for (const cityName in this.preferredCities) {
+
+      if (this.preferredCities.hasOwnProperty(cityName)) {
+
+        currentWeatherSubscription = this.openWeatherService.getCurrentWeatherForCity(
+          cityName, this.units
+        ).subscribe((response: OpenWeatherData) =>
+          this.preferredCities[cityName].currentData = response
+        );
+
+      }
+
+    }
     this.subscriptionManager.add(currentWeatherSubscription);
 
   }
@@ -47,11 +60,21 @@ export class HomeComponent implements OnInit, OnDestroy {
    */
   getWeatherForecastForCity(): void {
 
-    const weatherForecastSubscription = this.openWeatherService.getWeatherForecastForCity(
-      'London', this.units
-    ).subscribe((response: OpenWeatherDataForecast) => {
-      console.log('getWeatherForecastForCity ', response);
-    });
+    let weatherForecastSubscription: Subscription;
+
+    for (const cityName in this.preferredCities) {
+
+      if (this.preferredCities.hasOwnProperty(cityName)) {
+
+        weatherForecastSubscription = this.openWeatherService.getWeatherForecastForCity(
+          cityName, this.units
+        ).subscribe((response: OpenWeatherDataForecast) =>
+          this.preferredCities[cityName].forecastData = response
+        );
+
+      }
+
+    }
     this.subscriptionManager.add(weatherForecastSubscription);
 
   }
@@ -64,7 +87,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     const dailyWeathersubscription = this.openWeatherService.getDailyWeatherForecastForCity(
       'London', this.units
     ).subscribe((response: OpenWeatherDataForecast) => {
-      console.log('getDailyWeatherForecastForCity ', response);
+
     });
     this.subscriptionManager.add(dailyWeathersubscription);
 

@@ -65,4 +65,27 @@ export class Constants {
         city: {},
     };
 
+    SELECTED_CITIES = {
+        Amsterdam: {
+          currentData: {},
+          forecastData: {}
+        },
+        London: {
+          currentData: {},
+          forecastData: {}
+        },
+        Barcelona: {
+          currentData: {},
+          forecastData: {}
+        },
+        Paris: {
+          currentData: {},
+          forecastData: {}
+        },
+        Berlin: {
+          currentData: {},
+          forecastData: {}
+        },
+    };
+
 }

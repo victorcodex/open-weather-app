@@ -1,0 +1,28 @@
+.container {
+    margin: 15% auto;
+    width: 95%;
+    text-align: center;
+}
+.container-child {
+    cursor: pointer;
+}
+mat-grid-tile {
+    background: #f3f3f3;
+}
+.city-title {
+    font-size: 20px;
+    padding-left: 10px;
+    font-weight: 100;
+}
+.flag-gif {
+    width: 23px;
+}
+.temp {
+    margin: 12px;
+    font-size: 25px;
+    font-family: cursive;
+}
+.main {
+    font-size: 13px;
+    font-weight: 200;
+}
